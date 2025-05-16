@@ -16,4 +16,4 @@
 <img src="https://github.com/Szymon-Domagala/JsonPlaceholderApiProjcet/blob/main/EkranSzczegolowPostuBlad-ezgif.com-video-to-gif-converter.gif?raw=true" alt="Image title" width="250">
 
 ### Błąd w ekranie szczegółów użytkownika
-<img src="https://github.com/Szymon-Domagala/JsonPlaceholderApiProjcet/blob/main/EkranSzczegolowUzytkownika-ezgif.com-video-to-gif-converter.gif?raw=true" alt="Image title" width="250">
+<img src="https://github.com/Szymon-Domagala/JsonPlaceholderApiProjcet/blob/main/EkranSzczegolowUzytkownikaBlad-ezgif.com-video-to-gif-converter.gif?raw=true" alt="Image title" width="250">
