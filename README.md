@@ -10,7 +10,7 @@
 
 ## Obsługa błędów
 ### Błąd w ekranie głównym
-<img src="https://github.com/Szymon-Domagala/JsonPlaceholderApiProjcet/blob/main/EkranSzczegolowUzytkownika-ezgif.com-video-to-gif-converter.gif?raw=true" alt="Image title" width="250">
+<img src="https://github.com/Szymon-Domagala/JsonPlaceholderApiProjcet/blob/main/EkranGlownyBlad-ezgif.com-video-to-gif-converter.gif?raw=true" alt="Image title" width="250">
 
 ### Błąd w ekranie szczegółów postu
 <img src="https://github.com/Szymon-Domagala/JsonPlaceholderApiProjcet/blob/main/EkranSzczegolowUzytkownika-ezgif.com-video-to-gif-converter.gif?raw=true" alt="Image title" width="250">
