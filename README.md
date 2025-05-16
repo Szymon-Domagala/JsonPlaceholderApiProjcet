@@ -1,6 +1,6 @@
 # Projekt
 ## Ekran główny
-<img src="https://github.com/Szymon-Domagala/JsonPlaceholderApiProjcet/blob/main/EkranGlowny-ezgif.com-video-to-gif-converter.gif?raw=true" alt="Image title" width="250">
+<img src="https://github.com/Szymon-Domagala/JsonPlaceholderApiProjcet/blob/main/Gifs/EkranGlowny-ezgif.com-video-to-gif-converter.gif?raw=true" alt="Image title" width="250">
 
 ## Ekran szczegółów postu
 <img src="https://github.com/Szymon-Domagala/JsonPlaceholderApiProjcet/blob/main/EkranSzczegolowPostu-ezgif.com-video-to-gif-converter.gif?raw=true" alt="Image title" width="250">
