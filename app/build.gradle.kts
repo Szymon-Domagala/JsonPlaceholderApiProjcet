@@ -71,4 +71,11 @@ dependencies {
     implementation(libs.retrofit2.kotlinx.serialization.converter)
     implementation(libs.retrofit)
     implementation("io.coil-kt:coil-compose:2.4.0")
+
+    // Google maps
+    implementation("com.google.maps.android:maps-compose:4.3.0")
+    implementation("com.google.android.gms:play-services-maps:18.2.0")
+
+    // Data Store
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
 }

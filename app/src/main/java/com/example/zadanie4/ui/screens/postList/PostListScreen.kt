@@ -1,24 +1,35 @@
 package com.example.zadanie4.ui.screens.postList
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.zadanie4.model.MyProfileScreen
 import com.example.zadanie4.model.PostDetailsScreen
 import com.example.zadanie4.model.UserDetailsScreen
+import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import coil3.compose.rememberAsyncImagePainter
+import com.example.zadanie4.PostListApplication
+import com.example.zadanie4.model.UserPrefs
 
 @Composable
 fun PostListScreen(
@@ -26,6 +37,11 @@ fun PostListScreen(
     viewModel: PostListViewModel,
     retryAction: () -> Unit
 ) {
+
+    val context = LocalContext.current.applicationContext as PostListApplication
+    val userPrefsRepo = context.container.userPreferencesRepository
+    val userPrefs by userPrefsRepo.userFlow.collectAsState(initial = UserPrefs("", "", ""))
+
     when (val state = viewModel.uiState) {
         is PostListViewModel.UiState.Loading -> LoadingScreen()
         is PostListViewModel.UiState.Error -> ErrorScreen(retryAction)
@@ -36,7 +52,9 @@ fun PostListScreen(
             },
             onUserClick = { userId ->
                 navController.navigate(UserDetailsScreen(userId))
-            }
+            },
+            onProfileClick = { navController.navigate(MyProfileScreen) },
+            userPrefs = userPrefs
         )
     }
 }
@@ -46,24 +64,50 @@ fun PostListScreen(
 fun PostListContent(
     posts: List<PostListViewModel.PostWithUser>,
     onPostClick: (PostListViewModel.PostWithUser) -> Unit,
-    onUserClick: (Int) -> Unit
+    onUserClick: (Int) -> Unit,
+    onProfileClick: () -> Unit,
+    userPrefs: UserPrefs
 ) {
     Column(modifier = Modifier.fillMaxSize()) {
 
-        Row(
+        Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(Color.LightGray)
-                .padding(8.dp),
-            verticalAlignment = Alignment.CenterVertically
+                .height(64.dp)
+                .background(MaterialTheme.colorScheme.primary),
+            contentAlignment = Alignment.Center
         ) {
             Text(
                 text = "Posts",
-                modifier = Modifier.weight(1f),
                 fontSize = 22.sp,
                 fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onPrimary,
                 textAlign = TextAlign.Center
             )
+            IconButton(
+                onClick = onProfileClick,
+                modifier = Modifier
+                    .align(Alignment.CenterEnd)
+                    .padding(end = 8.dp)
+            ) {
+                if (userPrefs.profileImagePath.isNotBlank()) {
+                    Image(
+                        painter = rememberAsyncImagePainter(userPrefs.profileImagePath),
+                        contentDescription = "Profilowe",
+                        modifier = Modifier
+                            .size(32.dp)
+                            .clip(CircleShape),
+                        contentScale = ContentScale.Crop
+                    )
+                } else {
+                    Icon(
+                        imageVector = Icons.Default.AccountCircle,
+                        contentDescription = "Profil",
+                        modifier = Modifier.size(32.dp),
+                        tint = MaterialTheme.colorScheme.onPrimary
+                    )
+                }
+            }
         }
 
         LazyColumn(
@@ -77,7 +121,7 @@ fun PostListContent(
                     onPostClick = { onPostClick(postWithUser) },
                     onUserClick = onUserClick
                 )
-                Divider()
+                HorizontalDivider()
             }
         }
     }
@@ -144,4 +188,3 @@ fun ErrorScreen(retryAction: () -> Unit) {
         }
     }
 }
-

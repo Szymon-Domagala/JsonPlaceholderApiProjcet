@@ -11,4 +11,5 @@ data class PostDetailsScreen(val postId: Int)
 @Serializable
 data class UserDetailsScreen(val userId: Int)
 
-
+@Serializable
+object MyProfileScreen

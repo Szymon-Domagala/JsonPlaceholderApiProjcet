@@ -1,5 +1,7 @@
 package com.example.zadanie4.data
 
+import android.content.Context
+import com.example.zadanie4.data.dataStore.UserPreferencesDataSource
 import com.example.zadanie4.data.network.JsonPlaceholderService
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
@@ -10,9 +12,10 @@ interface AppContainer {
     val postRepository: PostRepository
     val todoRepository: TodoRepository
     val userRepository: UserRepository
+    val userPreferencesRepository: UserPreferencesRepository
 }
 
-class DefaultAppContainer : AppContainer{
+class DefaultAppContainer(private val context: Context) : AppContainer{
     private val jsonPlaceholderApiBaseUrl = "https://jsonplaceholder.typicode.com/"
 
     private val retrofit: Retrofit = Retrofit.Builder()
@@ -22,6 +25,10 @@ class DefaultAppContainer : AppContainer{
 
     private val jsonPlaceholderService: JsonPlaceholderService by lazy {
         retrofit.create(JsonPlaceholderService::class.java)
+    }
+
+    private val userPreferencesDataSource by lazy {
+        UserPreferencesDataSource(context)
     }
 
     override val postRepository: PostRepository by lazy {
@@ -34,5 +41,9 @@ class DefaultAppContainer : AppContainer{
 
     override val userRepository: UserRepository by lazy {
         UserRepositoryImpl(jsonPlaceholderService)
+    }
+
+    override val userPreferencesRepository: UserPreferencesRepository by lazy {
+        UserPreferencesRepositoryImpl(userPreferencesDataSource)
     }
 }

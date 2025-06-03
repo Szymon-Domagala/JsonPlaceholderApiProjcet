@@ -18,8 +18,9 @@ import kotlinx.coroutines.launch
 
 class PostListViewModel(
     private val postRepository: PostRepository,
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
 )  : ViewModel(){
+
     data class PostWithUser(
         val post: Post,
         val user: User?

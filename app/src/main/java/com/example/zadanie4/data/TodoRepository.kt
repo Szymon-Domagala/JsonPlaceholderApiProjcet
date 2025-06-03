@@ -12,4 +12,3 @@ class TodoRepositoryImpl(
 ) : TodoRepository {
     override suspend fun getTodosByUserId(userId: Int): List<Todo> = jsonPlaceholderService.getTodosByUserId(userId)
 }
-
